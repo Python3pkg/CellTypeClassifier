@@ -19,10 +19,7 @@
 # Then visualize the Mean Firing Rate, the Instantaneous Firing Rate and the auto/cross correlograms of units thanks to the visualization() method.
 # Maxime Beau, 2017-05-10
 
-__title__ = 'Units Features Exctraction'
-__package_name__ = 'FeaturesExtraction'
-__author__ = 'Maxime Beau'
-__email__ = 'm.beau047@gmail.com'
+
 
 import numpy as np
 from scipy import signal
