@@ -1,4 +1,5 @@
-CellTypeClassifier
+					---------- CellTypeClassifier ----------
+
 
 
 Kilosort/phy generated units supervised and unsupervised classification, with the hope to sort them by cell type.
