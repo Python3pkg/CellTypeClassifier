@@ -1,9 +1,9 @@
-#from distutils.core import setup
-from setuptools import setup
+from distutils.core import setup
+#from setuptools import setup
 setup(
   name = 'CellTypeCLassifier',
   packages = ['CellTypeCLassifier'], # this must be the same as the name above
-  version = 'beta',
+  version = '0.1',
   description = 'Kilosort/phy generated units supervised and unsupervised classification, with the hope to sort them by cell type.',
   author = 'Maxime Beau',
   author_email = 'm.beau047@gmail.com',
