@@ -1,7 +1,6 @@
 					---------- CellTypeClassifier ----------
 
 
-
 Kilosort/phy generated units supervised and unsupervised classification, with the hope to sort them by cell type.
 
 Kilosort: https://github.com/cortex-lab/KiloSort (M. Pachitariu, Kwikteam)
