@@ -1,0 +1,12 @@
+Metadata-Version: 1.1
+Name: CellTypeCLassifier
+Version: beta
+Summary: Kilosort/phy generated units supervised and unsupervised classification, with the hope to sort them by cell type.
+Home-page: https://github.com/MS047/CellTypeClassifier
+Author: Maxime Beau
+Author-email: m.beau047@gmail.com
+License: UNKNOWN
+Download-URL: https://github.com/MS047/CellTypeClassifier/archive/0.1.tar.gz
+Description: UNKNOWN
+Keywords: Kilosort,Phy,Classifier,sklearn,Extracellular,Spike Sorting
+Platform: UNKNOWN
