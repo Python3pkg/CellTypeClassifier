@@ -105,10 +105,12 @@ class DataManager():
 	def __init__(self, directory=None):
 		if directory==None:
 			directory = os.getcwd()
+		elif directory==1:
+			directory='/Volumes/DK_students1/2017-04-08'
 		os.chdir(directory)
 		self.__dir__ = directory
 
-	def chdir(self, directory="/Volumes/DK_students1/2017-04-08/"):
+	def chdir(self, directory="/Volumes/DK_students1/2017-04-08"):
 		'''chdir() -> .__dir__: directory to seek for data and generate plots.'''
 		os.chdir(directory)
 		self.__dir__ = directory
@@ -355,6 +357,7 @@ class DataManager():
 
 
 
+			print("\n\n--> Units to visualize: ", unitsList, "\n\n--> Features displayed: ", featuresList, "\n\n")
 
 			if "MFR" in featuresList:
 				self.MeanFR()
@@ -368,14 +371,15 @@ class DataManager():
 				dfMFR = pd.DataFrame(data=MFRList, index=unitsListStr, columns=["Mean Firing rate (Hz)"])
 				axMFR = dfMFR.plot.bar()  # s is an instance of Series
 				figMFR = axMFR.get_figure()
-				if not os.path.exists(self.__dir__+'visMFRs/'):
-					os.makedirs(self.__dir__+'visMFRs/')
-				figMFRpath = self.__dir__+'visMFRs/'+'MFR'
+				if not os.path.exists(self.__dir__+'/visMFRs'):
+					os.makedirs(self.__dir__+'/visMFRs')
+				figMFRpath = self.__dir__+'/visMFRs'+'/MFR'
 				for i in unitsListStr:
 					figMFRpath+=', '
 					figMFRpath+=i
 				figMFR.savefig(figMFRpath+'.eps')
 				figMFR.savefig(figMFRpath+'.png')
+				break
 
 
 			elif "IFR" in featuresList:
@@ -383,26 +387,25 @@ class DataManager():
 				IFRDic = {}
 				for i in unitsList:
 					IFRidx = np.where(self.clusters==i)[0][0]
-					IFRDic[self.IFR[IFRidx][0]] = pd.Series(self.IFR[IFRidx][1:], index=np.arange(len(self.IFR[IFRidx][1:])))
+					IFRDic[self.IFR[IFRidx][0]] = pd.Series(self.IFR[IFRidx][1:].tolist(), index=np.arange(len(self.IFR[IFRidx][1:])))
 				unitsListStr = [str(i) for i in unitsList]
-				#for i in range(len(IFRlist[0])):
 
-				assert len(unitsListStr) == len(IFRList)
-
-				dfIFR = pd.DataFrame(data=IFRDic, index=np.arange(len(IFRList[0])), columns=unitsListStr)
-				axIFR = dfIFR.plot(subplots=True)  # s is an instance of Series
+				dfIFR = pd.DataFrame(IFRDic)
+				axIFR = dfIFR.plot.area(stacked=False)  # s is an instance of Series
 				figIFR = axIFR.get_figure()
-				if not os.path.exists(self.__dir__+'visIFRs/'):
-					os.makedirs(self.__dir__+'visIFRs/')
-				figIFRpath = self.__dir__+'visIFRs/'+'IFR'
+				if not os.path.exists(self.__dir__+'/visIFRs'):
+					os.makedirs(self.__dir__+'/visIFRs')
+				figIFRpath = self.__dir__+'/visIFRs'+'/IFR'
 				for i in unitsListStr:
 					figIFRpath+=', '
 					figIFRpath+=i
 				figIFR.savefig(figIFRpath+'.eps')
 				figIFR.savefig(figIFRpath+'.png')
+				break
 
 			elif "CCG" in featuresList:
 				self.CCG()
+				break
 
 
 			if SHOW == True:

@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: CellTypeCLassifier
-Version: beta
+Version: 0.1
 Summary: Kilosort/phy generated units supervised and unsupervised classification, with the hope to sort them by cell type.
 Home-page: https://github.com/MS047/CellTypeClassifier
 Author: Maxime Beau
