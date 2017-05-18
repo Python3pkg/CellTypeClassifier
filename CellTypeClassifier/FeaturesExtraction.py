@@ -118,7 +118,7 @@ class DataManager():
 	def load_sampleRate(self):
 		'''load_sampleRate() -> .sample_rate: Sampling rate (30Khz)'''
 		try:
-			print("Sample rate already loaded: ", self.sample_rate)
+			print(("Sample rate already loaded: ", self.sample_rate))
 		except:
 			import params
 			self.sample_rate = params.sample_rate
@@ -128,7 +128,7 @@ class DataManager():
 	def load_spsamples(self):
 		'''load_spsamples() -> .spike_samples: Spike times in sample units'''
 		try:
-			print("Spike samples already loaded. Array shape:", self.spike_samples.shape)
+			print(("Spike samples already loaded. Array shape:", self.spike_samples.shape))
 		except:
 			self.spike_samples = np.load("spike_times.npy")
 			self.spike_samples = self.spike_samples.flatten()
@@ -139,7 +139,7 @@ class DataManager():
 	def calcul_sptimes(self):
 		'''calcul_sptimes() -> .spike_times: Spikes times in seconds'''
 		try:
-			print("Spike times already calculated. Array shape:", self.spike_times.shape)
+			print(("Spike times already calculated. Array shape:", self.spike_times.shape))
 		except:
 			self.load_sampleRate()
 			self.load_spsamples()
@@ -151,7 +151,7 @@ class DataManager():
 	def load_spclusters(self):
 		'''load_spclusters() -> .spike_clusters: Spikes clusters, cluster corresponding to each spike of Spike times'''
 		try:
-			print("Spike clusters already loaded. Array shape:", self.spike_clusters.shape)
+			print(("Spike clusters already loaded. Array shape:", self.spike_clusters.shape))
 		except:
 			self.spike_clusters = np.load("spike_clusters.npy")
 			print("Spike clusters loaded.")
@@ -160,7 +160,7 @@ class DataManager():
 	def extract_cIds(self):
 		'''extract_cIds() -> .clusters, .spike_clusters_i: Clusters numbers (unique occurence) and indexes in the array'''
 		try:
-			print("Cluster Ids already extracted. Array shape:", self.clusters.shape)
+			print(("Cluster Ids already extracted. Array shape:", self.clusters.shape))
 		except:
 			self.load_spclusters()
 			self.clusters = _unique(self.spike_clusters)
@@ -176,7 +176,7 @@ class DataManager():
 		[[cluster_idx1, t1, t2...tn], ...] 
 		with t1... in seconds or samples'''
 		try:
-			print("Spike samples and times already attributed. List length:", len(self.attributed_spikeTimes))
+			print(("Spike samples and times already attributed. List length:", len(self.attributed_spikeTimes)))
 		except:
 			self.calcul_sptimes()
 			self.extract_cIds()
@@ -197,7 +197,7 @@ class DataManager():
 	def InstFR(self, sd = 10):
 		'''InstFR() -> .IFR: Instantaneous Firing rate, lists of n_clusters np arrays of the form [[cluster_idx1, IFR1, IFR2...IFRn], ...]'''
 		try:
-			print("IFR already calculated. List length:", len(self.IFR))
+			print(("IFR already calculated. List length:", len(self.IFR)))
 		except:
 			self.attribute_spikeSamples_Times()
 			gaussian = signal.gaussian(90, sd)
@@ -216,7 +216,7 @@ class DataManager():
 	def MeanFR(self):
 		'''MeanFR() -> .MFR: Mean Firing rate, lists of n_clusters np arrays of the form [[cluster_idx1, MFR], ...]'''
 		try:
-			print("MFR already calculated. List length:", len(self.MFR))
+			print(("MFR already calculated. List length:", len(self.MFR)))
 		except:
 			self.attribute_spikeSamples_Times()
 			recordLen = self.spike_times[-1] #Approximately length of the whole recording, in seconds
@@ -229,7 +229,7 @@ class DataManager():
 	def CCG(self, bin_size=0.0005, window_size=0.080, symmetrize=True):
 		'''CCG() -> .correlograms: all crossCorrelograms in a n_clusters x n_clusters x winsize_bins matrix.'''
 		try:
-			print("CrossCorrelograms already computed.", len(self.correlograms))
+			print(("CrossCorrelograms already computed.", len(self.correlograms)))
 		except:
 			self.calcul_sptimes()
 			self.extract_cIds()
@@ -257,7 +257,7 @@ class DataManager():
 			mask = np.ones_like(self.spike_samples, dtype=np.bool)
 
 			self.correlograms = _create_correlograms_array(n_clusters, winsize_bins)
-			print("winsize_bins = ", winsize_bins)
+			print(("winsize_bins = ", winsize_bins))
 
 		    # The loop continues as long as there is at least one spike with
 		    # a matching spike.
@@ -316,7 +316,7 @@ class DataManager():
 				unitsList = []
 
 				while 1:
-					idx = input("\n\nPlease dial a cluster index ; dial <d> if you are done: ")
+					idx = eval(input("\n\nPlease dial a cluster index ; dial <d> if you are done: "))
 
 					if idx == "d":
 						break
@@ -338,7 +338,7 @@ class DataManager():
 				featuresList = []
 
 				while 1:
-					idx = input("\n\nPlease dial a feature to visualize - <MFR>, <IFR> or <CCG> ; dial <d> if you are done: ")
+					idx = eval(input("\n\nPlease dial a feature to visualize - <MFR>, <IFR> or <CCG> ; dial <d> if you are done: "))
 					
 					if idx == "d":
 						break
@@ -357,7 +357,7 @@ class DataManager():
 
 
 
-			print("\n\n--> Units to visualize: ", unitsList, "\n\n--> Features displayed: ", featuresList, "\n\n")
+			print(("\n\n--> Units to visualize: ", unitsList, "\n\n--> Features displayed: ", featuresList, "\n\n"))
 
 			if "MFR" in featuresList:
 				self.MeanFR()
